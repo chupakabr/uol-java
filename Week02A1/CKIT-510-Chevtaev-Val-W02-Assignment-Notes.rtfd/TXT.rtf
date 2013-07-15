@@ -10,10 +10,24 @@
 \b\fs26 Overview
 \b0\fs24 \
 \
-The app implements everything exactly according to the assignment task with the following additions:\
-1. The app does validation of username;\
-2. The app does validation of age;\
-3. The app shows error dialog with informative message and exits if user presses "Cancel" button (or "Escape" button on the keyboard) during typing name or age:\
+The app implements everything exactly according to the assignment task with the following customizations:\
+1. The app displays all input fields just in one JPanel;\
+2. The app does validation of all input values;\
+3. The app displays appropriate error message in case of invalid input value:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \
+The app has only 2 screens.\
+\
+\ul Input fields screen\ulnone :\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 {{\NeXTGraphic Screen Shot 2013-07-15 at 3.46.58 PM.png \width11460 \height4400
+}¬}\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \ul \ulc0 \
+Results screen\ulnone  (HTML):\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 {{\NeXTGraphic Screen Shot 2013-07-15 at 3.36.23 PM.png \width7040 \height4640
+}¬}\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
 \cf0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
@@ -21,15 +35,19 @@ The app implements everything exactly according to the assignment task with the 
 \b\fs26 \cf0 Validation
 \b0\fs24 \
 \
-User \ul name\ulnone  validation constraints:\
+Swimming pool \ul width\ulnone  validation constraints:\
 - Cannot be blank;\
-- Cannot consist of only space characters (like tab or space).\
+- Should be positive number excluding zero (0).\
 \
-User \ul age\ulnone  validation constraints:\
+User \ul length\ulnone  validation constraints:\
 - Cannot be blank;\
-- Should be a number, i.e. consist only of 0123456789 characters.\
+- Should be positive number excluding zero (0).\
 \
-In case of validation error the app shows input dialog again with cleared user's input.\
+User \ul depth\ulnone  validation constraints:\
+- Cannot be blank;\
+- Should be positive number excluding zero (0).\
+\
+In case of validation error the app displays error message right under input fields.\
 \
 
 \b\fs26 Notes

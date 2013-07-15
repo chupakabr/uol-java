@@ -78,21 +78,21 @@ public class SwimmingPoolCharacteristicsPanel extends JPanel {
         try {
             getWidthValue();
         } catch (NumberFormatException e) {
-            statusLabel.setText("Invalid value for [width] property, should be a number greater than 0");
+            statusLabel.setText("Invalid value of [width] property, should be a number greater than 0");
             return false;
         }
 
         try {
             getLengthValue();
         } catch (NumberFormatException e) {
-            statusLabel.setText("Invalid value for [length] property, should be a number greater than 0");
+            statusLabel.setText("Invalid value of [length] property, should be a number greater than 0");
             return false;
         }
 
         try {
             getDepthValue();
         } catch (NumberFormatException e) {
-            statusLabel.setText("Invalid value for [depth] property, should be a number greater than 0");
+            statusLabel.setText("Invalid value of [depth] property, should be a number greater than 0");
             return false;
         }
 
