@@ -1,0 +1,78 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf390
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 LucidaGrande;}
+{\colortbl;\red255\green255\blue255;\red52\green52\blue52;}
+\margl1440\margr1440\vieww18040\viewh14880\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 Hi Sam and class,\
+\
+At first, please take a look at the code attached. I've used ArrayTest and ArrayWriter classes which are 100% same for testing both thread-safe and non-thread-safe SimpleArray classes. There is W07DQ1App class which has test() having two parameters:\
+1. Test name - not must interesting about it;\
+2. Array object - which is object which implements MutableArray interface (see attached java class), there are two implementations of this interface: SimpleArrayFig26d5 which is SimpleArray class from Figure 26.5, and SimpleArrayFig26d8 which is SimpleArray class from Figure 26.8.\
+\
+Here is the output of running the same test with two different SimpleArray implementations (non-thread-safe and thread-safe):\
+----\
+
+\b Figure 26.5 (Thread-unsafe)
+\b0 \
+\
+pool-1-thread-1 wrote a to element 0.\
+Next write index: 1\
+pool-1-thread-2 wrote P to element 0.\
+Next write index: 2\
+pool-1-thread-1 wrote b to element 1.\
+Next write index: 3\
+pool-1-thread-1 wrote c to element 3.\
+Next write index: 4\
+pool-1-thread-2 wrote Q to element 2.\
+Next write index: 5\
+pool-1-thread-2 wrote R to element 5.\
+Next write index: 6\
+\
+Contents of SimpleArray:\
+[P, b, Q, c, \
+\
+\
+
+\b Figure 26.8 (Thread-safe)
+\b0 \
+\
+pool-2-thread-1 wrote a to element 0.\
+Next write index: 1\
+pool-2-thread-1 wrote b to element 1.\
+Next write index: 2\
+pool-2-thread-1 wrote c to element 2.\
+Next write index: 3\
+pool-2-thread-2 wrote P to element 3.\
+Next write index: 4\
+pool-2-thread-2 wrote Q to element 4.\
+Next write index: 5\
+pool-2-thread-2 wrote R to element 5.\
+Next write index: 6\
+\
+Contents of SimpleArray:\
+a b c P Q R \
+----\
+\
+As we can clearly see 
+\b thread-unsafe
+\b0  implementation could lead to unpredictable situations when the array has uninitialized rows. This happens because of concurrent read and modification of the same variable from different thread without any synchronization.\
+Here is the workflow why such concurrent error could happen:\
+1. Thread 1 reads "int position = writeIndex", writeIndex is 0 at this stage;\
+2. Thread 2 reads "int position = writeIndex", writeIndex is 0 at this stage;\
+3. Thread 1 increments writeIndex variable: "++writeIndex", now the value of writeIndex is 1;\
+4. Thread 2 increments writeIndex variable: "++writeIndex", now the value of writeIndex is 2;\
+5. Thread 1 runs again: reads "int position = writeIndex", writeIndex is 2 at this stage;\
+6. Thread 1 increments writeIndex variable: "++writeIndex", now the value of writeIndex is 3;\
+7. Thread 2 runs again: reads "int position = writeIndex", writeIndex is 3 at this stage;\
+\'85.\
+So on the stage 1-2 both threads think that they should update first row of the array and then increment current position value, so in the end we have uninitialized second row in the array.\
+Run by run this problem could appear or disappear which makes such problems hard to find in really large projects.\
+In 
+\b thread-safe
+\b0  implementation there is no such problem as we guard the whole add() method with synchronized block which guarantees that the body of the method could be executed only by one thread at a time, another thread which will try to run this method will wait until current thread finish executing add() method.\
+\
+With best,\
+Val
+\f1 \cf2 \
+}
