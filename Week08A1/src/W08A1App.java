@@ -44,7 +44,7 @@ public class W08A1App implements Runnable {
 
         final DrawTool mainPane = new DrawTool(WIDTH, HEIGHT);
         frame.add(mainPane);
-        frame.setJMenuBar(new DrawToolMenu(mainPane, mainPane));
+        frame.setJMenuBar(mainPane.getMenu());;
         frame.setMinimumSize(new Dimension(WIDTH, HEIGHT));
         frame.pack();
         frame.setResizable(true);
